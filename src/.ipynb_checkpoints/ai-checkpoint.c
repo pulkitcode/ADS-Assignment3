@@ -125,7 +125,7 @@ void find_solution( state_t* init_state  ){
         stack_pop();
 		
         expanded_nodes++;
-
+		printf("\nExpand nodes: %d\n",expanded_nodes);
         
         if (num_pegs(&n->state)<rempegs){
 			//printf("\ninside save soln\n");
@@ -151,8 +151,10 @@ void find_solution( state_t* init_state  ){
 					
 					node_t * new_node = (node_t *) malloc(sizeof(node_t));
                     new_node = applyAction(n,&(&n->state)->cursor,left,new_node);
-                    generated_nodes++;
                     
+					generated_nodes++;
+                    
+					printf("\nGenerated nodes: %d i = %d j = %d Top index: %d\n",generated_nodes,i,j,stack_top_idx);
 					if(won(&new_node->state)){
 							save_solution(new_node);
 							rempegs = num_pegs(&new_node->state);
@@ -166,6 +168,8 @@ void find_solution( state_t* init_state  ){
 								n = n->parent;
 							}
 							//free(n);
+							//printf("\nTop index of stack: %d\n", stack_top_idx);
+							printf("\nTop index of stack: %d\n", stack[stack_top_idx]->depth);
 							free_stack();
 							//printf("\nRemaining Pegs: %d\n\n",rempegs);
 							return;
@@ -186,7 +190,7 @@ void find_solution( state_t* init_state  ){
 					node_t * new_node = (node_t *) malloc(sizeof(node_t));
 					new_node = applyAction(n,&(&n->state)->cursor,right,new_node);
                     generated_nodes++;
-                    
+                    printf("\nGenerated nodes: %d i = %d j = %d Top index: %d\n",generated_nodes,i,j,stack_top_idx);
 
 					if(won(&new_node->state)){
 							//printf("\nWon\n");
@@ -201,6 +205,7 @@ void find_solution( state_t* init_state  ){
 								n = n->parent;
 							}
 							//free(n);
+							printf("\nTop index of stack: %d\n", stack[stack_top_idx]->depth);
 							free_stack();
 							//printf("\nRemaining Pegs: %d\n\n",rempegs);
 							return;
@@ -223,6 +228,7 @@ void find_solution( state_t* init_state  ){
 					node_t * new_node = (node_t *) malloc(sizeof(node_t));
 					new_node  = applyAction(n,&(&n->state)->cursor,up,new_node);
                     generated_nodes++;
+					printf("\nGenerated nodes: %d i = %d j = %d Top index: %d\n",generated_nodes,i,j,stack_top_idx);
                     
 					if(won(&new_node->state)){
 							save_solution(new_node);
@@ -236,6 +242,8 @@ void find_solution( state_t* init_state  ){
 								n = n->parent;
 							}
 							//free(n);
+							//printf("\nTop index of stack: %d\n", stack_top_idx);
+							printf("\nTop index of stack: %d\n", stack[stack_top_idx]->depth);
 							free_stack();
 							//printf("\nRemaining Pegs: %d\n\n",rempegs);
 							return;
@@ -258,6 +266,7 @@ void find_solution( state_t* init_state  ){
 					node_t * new_node = (node_t *) malloc(sizeof(node_t));
 					new_node = applyAction(n,&(&n->state)->cursor,down,new_node);
                     generated_nodes++;
+					printf("\nGenerated nodes: %d i = %d j = %d Top index: %d\n",generated_nodes,i,j,stack_top_idx);
                    
 					if(won(&new_node->state)){
 							save_solution(new_node);
@@ -271,6 +280,8 @@ void find_solution( state_t* init_state  ){
 								n = n->parent;
 							}
 							//free(n);
+							//printf("\nTop index of stack: %d\n", stack_top_idx);
+							printf("\nTop index of stack: %d\n", stack[stack_top_idx]->depth);
 							free_stack();
 							//printf("\nRemaining Pegs: %d\n\n",rempegs);
 							return;
@@ -305,6 +316,15 @@ void find_solution( state_t* init_state  ){
 	
 	}
 	
+	ht_clear(&table);
+	while(n!=NULL){
+		node_t* new_node2;
+		new_node2 = n;
+		free(new_node2);
+		n = n->parent;
+	}
+	//free(n);
+	free_stack();
 	
 
 }

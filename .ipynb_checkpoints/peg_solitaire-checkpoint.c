@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
 		// AI ALGORITHM CALL
 		//printf("hello");
 		find_solution( board );
-		//printf("\nsoln size after find: %d\n",solution_size);
+		//printf("\nsoln size after find: %d\n",stack[stack_top_idx]);
 
 		clock_t end = clock();
      	double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
