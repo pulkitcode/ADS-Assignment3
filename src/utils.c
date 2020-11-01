@@ -307,12 +307,12 @@ char* action_cstr(move_t move){
 	return " ";
 }
 
-void print_solution(){
+void print_solution(FILE* fp){
 
 	//printf("\nsolution size after: %d\n",solution_size);
 
 	for(int i=0;i< solution_size; i++)
-		printf("    %d - %s                              \n", i+1, action_cstr(solution_moves[i]));
+		fprintf(fp,"    %d - %s                              \n", i+1, action_cstr(solution_moves[i]));
 		
 }
 

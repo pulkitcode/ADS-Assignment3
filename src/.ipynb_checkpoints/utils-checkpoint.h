@@ -105,7 +105,7 @@ void initialize(state_t *board, int8_t layout);
 */
 void drawBoard(state_t *board);
 char* action_cstr(move_t move);
-void print_solution();
+void print_solution(FILE*fp);
 void play_solution();
 
 
