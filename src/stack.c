@@ -38,8 +38,12 @@ void print_stack() {
 }
 
 void free_stack() {
-	for(int i = 0;i<=stack_top_idx;i++)
+	int count2 = 0;
+	for(int i = 0;i<=stack_top_idx;i++){
+		count2++;
 		free(stack[i]);
+	}
+	//printf("\ninside free stack: %d\n",count2);
     stack_top_idx = -1;
 	printf("\n");
 }

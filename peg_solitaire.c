@@ -103,6 +103,9 @@ int main(int argc, char *argv[]) {
 		// AI ALGORITHM CALL
 		//printf("hello");
 		find_solution( board );
+		//free(s);
+		
+		//free(board);
 		//printf("\nsoln size after find: %d\n",stack[stack_top_idx]);
 
 		clock_t end = clock();
@@ -120,7 +123,6 @@ int main(int argc, char *argv[]) {
 		printf("\tExpanded/seconds: %d\n", (int)(expanded_nodes/cpu_time_used) );
 		printf("\tTime (seconds): %f\n", cpu_time_used );
 
-		
 
 		setBufferedInput(true);
 		printf("\033[?25h\033[0m");

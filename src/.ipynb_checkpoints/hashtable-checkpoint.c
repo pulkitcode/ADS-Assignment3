@@ -108,7 +108,7 @@ int ht_destroy(HashTable* table) {
 
 	for (chain = 0; chain < table->capacity; ++chain) {
 		node = table->nodes[chain];
-		while (node) {
+		while (node!=NULL) {
 			next = node->next;
 			_ht_destroy_node(node);
 			node = next;
