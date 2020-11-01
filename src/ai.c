@@ -78,6 +78,7 @@ void find_solution( state_t* init_state  ){
 
     //Add the initial node
     node_t* n = create_init_node( init_state );
+	node_t *p = n;
     stack_push(n);
     int rempegs = num_pegs(&n->state);
 
@@ -117,7 +118,7 @@ void find_solution( state_t* init_state  ){
 						if(won(&new_node->state)){
 								save_solution(new_node);
 								rempegs = num_pegs(&new_node->state);
-
+								free(p);
 								ht_destroy(&table);
 								free(new_node);
 								return;
@@ -126,7 +127,7 @@ void find_solution( state_t* init_state  ){
 						if(!ht_contains(&table,(void*)(&new_node->state))){
 							
 							stack_push(new_node);
-							ht_insert(&table,(void*)(&new_node->state),(void*)(&new_node->state));
+							ht_insert(&table,(void*)(&new_node->state),(void*)(new_node));
 						}
 						else{
 							
@@ -143,18 +144,15 @@ void find_solution( state_t* init_state  ){
 		
         if(expanded_nodes>=budget){
 			ht_destroy(&table);
-			free_stack();
-			free(n);
+			free(p);
             return;
         }
 
 	
 	}
 	
-	
+	free(p);
 	ht_destroy(&table);
-	free_stack();
-	free(n);
 	
 
 }

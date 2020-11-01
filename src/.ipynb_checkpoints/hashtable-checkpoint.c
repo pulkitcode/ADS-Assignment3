@@ -354,12 +354,9 @@ _ht_create_node(HashTable* table, void* key, void* value, HTNode* next) {
 	if ((node->key = malloc(table->key_size)) == NULL) {
 		return NULL;
 	}
-	if ((node->value = malloc(table->value_size)) == NULL) {
-		return NULL;
-	}
-
+	
 	memcpy(node->key, key, table->key_size);
-	memcpy(node->value, value, table->value_size);
+	node->value = value;
 	node->next = next;
 
 	return node;
